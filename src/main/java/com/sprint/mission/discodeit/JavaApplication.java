@@ -11,6 +11,10 @@ import com.sprint.mission.discodeit.service.jcf.JCFChannelService;
 import com.sprint.mission.discodeit.service.jcf.JCFMessageService;
 import com.sprint.mission.discodeit.service.jcf.JCFUserService;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 import static com.sprint.mission.discodeit.entity.ChannelType.PUBLIC;
 
 public class JavaApplication {
@@ -71,7 +75,7 @@ public class JavaApplication {
 
         //Message
         //Message
-        MessageService messageService = new JCFMessageService();
+        MessageService messageService = new JCFMessageService(userService, channelService);
 
         Message hello = messageService.create(notice.getId(), woody.getId(), "안녕하세요." );
 
@@ -95,4 +99,8 @@ public class JavaApplication {
             System.out.println("삭제 확인: " + e.getMessage());
         }
     }
+
+    UserService userService = new JCFUserService();
+    ChannelService channelService = new JCFChannelService();
+    MessageService messageService = new JCFMessageService(userService, channelService);
 }
